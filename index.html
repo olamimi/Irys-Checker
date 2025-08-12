@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRYS Checker</title>
+    <style>
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('./Font/SpaceGrotesk-Regular-BF65712b4fdc934.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('./Font/SpaceGrotesk-Medium-BF65712b4fd0ef9.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('./Font/SpaceGrotesk-SemiBold-BF65712b4fe55fc.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'WT Skrappa';
+            src: url('./Font/WT Skrappa Roman.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #121212;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #121212;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff4444, #cc3333);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: white;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .developer-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .header-right {
+            font-size: 18px;
+            font-weight: 500;
+            color: #51FFD3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .artist-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        /* Rectangle 9 */
+        .rectangle-9 {
+            position: absolute;
+            width: 100%;
+            height: 413px;
+            left: 0px;
+            top: 0px;
+            background: #121212;
+            z-index: -1;
+        }
+
+        /* Group 5 Logo */
+        .group-5-logo {
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.5);
+            z-index: 0;
+            max-width: 300px;
+            max-height: 200px;
+        }
+
+        .group-5-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Main content area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin-top: 413px;
+        }
+
+        /* Green banner */
+        .banner {
+            background-color: #51FFD3;
+            color: #2a2a2a;
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 80px;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            border-radius: 0;
+            position: absolute;
+            top: 413px;
+            z-index: 1;
+            margin-top: 0;
+        }
+
+        /* Search container */
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 80px;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            background-color: transparent;
+            border: 1.5px solid #51FFD3;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 80px;
+            padding: 0 20px;
+        }
+
+        .search-input::placeholder {
+            color: #888;
+        }
+
+        .search-input:focus {
+            border-color: #51FFD3;
+            box-shadow: 0 0 0 2px rgba(81, 255, 211, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #51FFD3;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .credit-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #51FFD3;
+            text-align: right;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .search-input::placeholder {
+            color: #888;
+        }
+
+        .search-input:focus {
+            border-color: #51FFD3;
+            box-shadow: 0 0 0 2px rgba(81, 255, 211, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #51FFD3;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .credit-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #51FFD3;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px 20px;
+            background-color: #000000;
+            margin-top: auto;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #51FFD3;
+        }
+
+        /* Results Popup */
+        .results-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .popup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sprite-message {
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: url('sprite.svg') center/cover;
+            border-radius: 10px;
+        }
+
+        .username-display {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .username-label {
+            color: white;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-family: 'WT Skrappa', serif;
+        }
+
+        .username-value {
+            color: #51FFD3;
+            font-size: 48px;
+            font-weight: 600;
+            font-family: 'WT Skrappa', serif;
+        }
+
+        .results-table {
+            width: 100%;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .header-rank,
+        .header-mindshare,
+        .header-timeframe {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 15px 0;
+            align-items: center;
+        }
+
+        .rank-cell {
+            color: #51FFD3;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .rank-cell:has-text("Not Found"),
+        .rank-cell[data-status="not-found"] {
+            color: #ff8c00 !important;
+        }
+
+        .mindshare-cell {
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .timeframe-cell {
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Popup overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .banner {
+                font-size: 16px;
+                padding: 12px 15px;
+                margin-bottom: 60px;
+            }
+
+            .search-input {
+                padding: 16px 50px 16px 18px;
+                font-size: 15px;
+            }
+
+            .search-icon {
+                right: 15px;
+                width: 18px;
+                height: 18px;
+            }
+
+            .developer-text,
+            .header-right {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+
+            .avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .banner {
+                font-size: 15px;
+                padding: 10px 12px;
+            }
+
+            .search-input {
+                padding: 14px 45px 14px 16px;
+                font-size: 14px;
+            }
+
+            .developer-text,
+            .header-right,
+            .credit-text,
+            .footer-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Rectangle 9 -->
+    <div class="rectangle-9"></div>
+    
+    <!-- Group 5 Logo -->
+    <div class="group-5-logo">
+        <img src="Group 5.svg" alt="Group 5 Logo">
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <a href="https://x.com/JediEth0" target="_blank" class="avatar-link">
+                <div class="avatar">
+                    <img src="Capt. Awesome Profile Picture.png" alt="Capt. Awesome">
+                </div>
+            </a>
+            <a href="https://x.com/JediEth0" target="_blank" class="developer-link">
+                <span class="developer-text">Developed by @JediEth0</span>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="https://x.com/GbiayeB" target="_blank" class="artist-avatar-link">
+                <img src="gbiayeb.jpg" alt="GbiayeB" class="artist-avatar">
+            </a>
+            <span>art by @GbiayeB</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Green Banner -->
+        <div class="banner">
+            Check your position on the IRYS leaderboard across all timeframes
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-container">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Enter username or wallet address..."
+                    id="searchInput"
+                >
+                <div class="search-icon" onclick="performSearch()">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="credit-text">Irys Checker By Capt. Awesome</div>
+        </div>
+    </main>
+
+    <!-- Results Popup -->
+    <div class="popup-overlay" id="popupOverlay" onclick="closePopup()"></div>
+    <div class="results-popup" id="resultsPopup">
+        <div class="popup-header">
+            <div class="sprite-message">The sprite has found your data</div>
+            
+            <div class="user-info">
+                <div class="user-avatar"></div>
+                <div class="username-display">
+                    <div class="username-label">Username</div>
+                    <div class="username-value" id="usernameValue">Enter a username</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-table">
+            <div class="table-header">
+                <div class="header-rank">Rank</div>
+                <div class="header-mindshare">Mindshare</div>
+                <div class="header-timeframe">Timeframe</div>
+            </div>
+            <!-- Results will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">updates everyday @ 00:00UTC</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
