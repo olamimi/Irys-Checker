@@ -454,6 +454,72 @@
             .header-right {
                 font-size: 16px;
             }
+
+            /* Mobile popup optimizations */
+            .results-popup {
+                width: 95%;
+                max-width: none;
+                padding: 20px;
+                margin: 10px;
+                max-height: 90vh;
+                overflow-y: auto;
+                border-radius: 12px;
+            }
+
+            .sprite-message {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .user-info {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+
+            .user-avatar {
+                width: 60px;
+                height: 60px;
+            }
+
+            .username-display {
+                align-items: center;
+                text-align: center;
+            }
+
+            .username-label {
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+
+            .username-value {
+                font-size: 32px;
+                line-height: 1.2;
+                word-break: break-all;
+            }
+
+            .table-header {
+                padding: 12px 0;
+            }
+
+            .header-rank,
+            .header-mindshare,
+            .header-timeframe {
+                font-size: 16px;
+            }
+
+            .table-row {
+                padding: 12px 0;
+            }
+
+            .rank-cell {
+                font-size: 20px;
+            }
+
+            .mindshare-cell,
+            .timeframe-cell {
+                font-size: 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -482,6 +548,94 @@
             .credit-text,
             .footer-text {
                 font-size: 14px;
+            }
+
+            /* Small mobile popup optimizations */
+            .results-popup {
+                width: 98%;
+                padding: 15px;
+                margin: 5px;
+                border-radius: 10px;
+            }
+
+            .popup-header {
+                margin-bottom: 20px;
+            }
+
+            .sprite-message {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .user-info {
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .user-avatar {
+                width: 50px;
+                height: 50px;
+            }
+
+            .username-label {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .username-value {
+                font-size: 24px;
+                line-height: 1.1;
+            }
+
+            .table-header {
+                padding: 10px 0;
+            }
+
+            .header-rank,
+            .header-mindshare,
+            .header-timeframe {
+                font-size: 14px;
+            }
+
+            .table-row {
+                padding: 10px 0;
+            }
+
+            .rank-cell {
+                font-size: 18px;
+            }
+
+            .mindshare-cell,
+            .timeframe-cell {
+                font-size: 14px;
+            }
+
+            /* Improve touch targets */
+            .popup-overlay {
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+
+        /* Additional mobile enhancements */
+        @media (max-width: 768px) {
+            .results-popup {
+                /* Prevent zoom on iOS when focusing inputs */
+                -webkit-text-size-adjust: 100%;
+                /* Smooth scrolling for overflow content */
+                -webkit-overflow-scrolling: touch;
+                /* Better backdrop blur support */
+                backdrop-filter: blur(10px);
+            }
+
+            /* Ensure popup doesn't get cut off by keyboard */
+            .popup-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
         }
     </style>
