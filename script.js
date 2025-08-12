@@ -147,7 +147,7 @@ function performSearch() {
             showErrorMessage();
         } else {
             // Update the username in the popup
-            document.getElementById('usernameValue').textContent = results[0]?.username || searchTerm.substring(1);
+            document.getElementById('usernameValue').textContent = '@' + (results[0]?.username || searchTerm.substring(1));
             
             // Update the results table
             updatePopupResults(results);
