@@ -412,6 +412,18 @@
             text-align: center;
         }
 
+        /* Popup developer credit */
+        .popup-developer-credit {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 12px;
+            font-weight: 400;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
         /* Popup overlay */
         .popup-overlay {
             position: fixed;
@@ -460,10 +472,14 @@
                 width: 95%;
                 max-width: none;
                 padding: 20px;
-                margin: 10px;
+                margin: 0;
                 max-height: 90vh;
                 overflow-y: auto;
                 border-radius: 12px;
+                /* Ensure proper centering on mobile */
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
 
             .sprite-message {
@@ -554,8 +570,12 @@
             .results-popup {
                 width: 98%;
                 padding: 15px;
-                margin: 5px;
+                margin: 0;
                 border-radius: 10px;
+                /* Ensure proper centering on small mobile */
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
 
             .popup-header {
@@ -719,6 +739,11 @@
                 <div class="header-timeframe">Timeframe</div>
             </div>
             <!-- Results will be populated by JavaScript -->
+        </div>
+        
+        <!-- Developer credit -->
+        <div class="popup-developer-credit">
+            developed by Capt. Awesome
         </div>
     </div>
 
